@@ -58,7 +58,7 @@ module Coinbase
             OpenSSL::HMAC.digest('sha256', Base64.decode64(@api_secret).strip,
                                  "#{timestamp}GET/users/self")).strip
           message[:timestamp] = timestamp
-          message[:siganture] = signature
+          message[:signature] = signature
           message[:key] = @api_key
           message[:passphrase] = @api_passphrase
         end
