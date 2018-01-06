@@ -50,7 +50,13 @@ module Coinbase
 
       def subscribe!(options = {})
         message = { type: 'subscribe' }
-        message[:product_id] = options[:product_id] || @product
+        product = options[:product_id] || @product
+        
+        if product.is_a?(Array)
+          message[:product_ids] = product
+        else
+          message[:product_id] = product
+        end
 
         if @api_key && @api_secret && @api_passphrase
           timestamp = Time.now.utc.to_i.to_s
