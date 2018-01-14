@@ -308,6 +308,15 @@ module Coinbase
         end
         out
       end
+      
+      def deposit_address(account_id)
+        out = nil
+        post("/coinbase-accounts/#{account_id}/addresses") do |resp|
+          out = response_object(resp)
+          yield(out, resp) if block_given?
+        end
+        out
+      end
 
       private
 
