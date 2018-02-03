@@ -126,18 +126,18 @@ module Coinbase
 
       def account_history(id, params = {})
         out = nil
-        get("/accounts/#{id}/ledger", params, paginate: true) do |resp|
+        get("/accounts/#{id}/ledger", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
 
       def account_holds(id, params = {})
         out = nil
-        get("/accounts/#{id}/holds", params, paginate: true) do |resp|
+        get("/accounts/#{id}/holds", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
@@ -188,9 +188,9 @@ module Coinbase
         params[:status] ||= "all"
 
         out = nil
-        get("/orders", params, paginate: true) do |resp|
+        get("/orders", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
@@ -206,9 +206,9 @@ module Coinbase
 
       def fills(params = {})
         out = nil
-        get("/fills", params, paginate: true) do |resp|
+        get("/fills", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
@@ -290,9 +290,9 @@ module Coinbase
       #
       def payment_methods(params = {})
         out = nil
-        get("/payment-methods", params, paginate: true) do |resp|
+        get("/payment-methods", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
@@ -302,9 +302,9 @@ module Coinbase
       #
       def coinbase_accounts(params = {})
         out = nil
-        get("/coinbase-accounts", params, paginate: true) do |resp|
+        get("/coinbase-accounts", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
