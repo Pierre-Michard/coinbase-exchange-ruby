@@ -369,11 +369,14 @@ module Coinbase
 
           if options[:paginate] && out.count == params[:limit]
             params[:after] = resp.headers['CB-AFTER']
-            get(path, params, options) do |pages|
-              out += pages
-              add_metadata(out)
-              yield(out)
-            end
+            # get(path, params, options) do |pages|
+            #   out += pages
+            #   add_metadata(out)
+            #   yield(out)
+            # end
+
+            # Disable internal pagination, abstract to caller for now
+            yield(out)
           else
             yield(out)
           end
