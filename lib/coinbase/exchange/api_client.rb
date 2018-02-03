@@ -360,8 +360,7 @@ module Coinbase
 
         http_verb('GET', "#{path}?#{URI.encode_www_form(params)}") do |resp|
           begin
-            out        = JSON.parse(resp.body)
-            header_out = JSON.parse(resp.headers)
+            out = JSON.parse(resp.body)
           rescue JSON::ParserError
             out = resp.body
           end
@@ -377,9 +376,9 @@ module Coinbase
             # end
 
             # Disable internal pagination, abstract to caller for now
-            yield(out, header_out)
+            yield(out, resp.headers)
           else
-            yield(out, header_out)
+            yield(out, resp.headers)
           end
         end
       end
