@@ -14,8 +14,8 @@ module Coinbase
 
       def http_verb(method, path, body = nil)
         case method
-        when 'GET' then req = Net::HTTP::Get.new(path)
-        when 'POST' then req = Net::HTTP::Post.new(path)
+        when 'GET' then req    = Net::HTTP::Get.new(path)
+        when 'POST' then req   = Net::HTTP::Post.new(path)
         when 'DELETE' then req = Net::HTTP::Delete.new(path)
         else fail
         end
