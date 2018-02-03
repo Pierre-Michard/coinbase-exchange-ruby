@@ -63,9 +63,9 @@ module Coinbase
         product = params[:product_id] || @default_product
 
         out = nil
-        get("/products/#{product}/trades", params, paginate: true) do |resp|
+        get("/products/#{product}/trades", params, paginate: true) do |resp, resp_headers|
           out = response_collection(resp)
-          yield(out, resp) if block_given?
+          yield(out, resp, resp_headers) if block_given?
         end
         out
       end
